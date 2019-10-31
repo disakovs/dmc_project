@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<form method='get'>
+{% csrf_token %}
+{{filter.form.as_p}}
+<button type='submit'>Search</button>
+
+     <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.row_date.label_tag }}
+          {% render_field filter.form.company class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.director.label_tag }}
+          {% render_field filter.form.oarex_rating class="form-control" %}
+        </div>
+        <div class="form-group col-sm-8 col-md-6">
+          {{ filter.form.manager.label_tag }}
+          {% render_field filter.form.pay_terms class="form-control" %}
+        </div> 
+        <div class="form-group col-sm-8 col-md-6">
+          {{ filter.form.analyst.label_tag }}
+          {% render_field filter.form.jurisdiction class="form-control" %}
+        </div> 
+        <div class="form-group col-sm-8 col-md-6">
+          {{ filter.form.analyst.label_tag }}
+          {% render_field filter.form.ownership class="form-control" %}
+        </div> 
+        <div class="form-group col-sm-8 col-md-6">
+        <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+        </div>
+        </div>
+      </div>
+
+    </div>
+</form>
+{% if not filter.qs %}
+<h3>No results found</h3>
+{% else %}
+
+  <table id='oarex_table' class='table table-striped'>
+        <thead>
+            <tr>
+                <th scope='col'>Company</th>
+                <th scope='col'>Oerex Rating</th>
+                <th scope='col'>Pay Terms</th>
+                <th scope='col'>Jurisdiction</th>
+                <th scope='col'>Ownership</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for debtor_data in filter.qs %}
+            <tr>
+                <th scope='row'>{{debtor_data.company}}</th>
+                <td>{{debtor_data.oarex_rating}}</td>
+                <td>{{debtor_data.pay_terms}}</td>
+                <td>{{debtor_data.jurisdiction}}</td>
+                <td>{{debtor_data.ownership}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+      console.log('first hi')
+    $(function() {
+      console.log('second hi')
+      console.log($("#oarex_table"))
+      $("#oarex_table").tablesorter();
+    });
+    </script>
+{% endif %}
+{% endblock %}
