@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'oarex',
     'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

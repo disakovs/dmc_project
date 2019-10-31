@@ -1,40 +1,46 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block page_content %}
 <form method='get'>
 {% csrf_token %}
-{{filter.form.as_p}}
-<button type='submit'>Search</button>
+<div class="row">
+    
+    <div class="form-group col-md-6">
 
-     <div class="row">
-        <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.row_date.label_tag }}
-          {% render_field filter.form.company class="form-control" %}
-        </div>
-        <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.director.label_tag }}
-          {% render_field filter.form.oarex_rating class="form-control" %}
-        </div>
-        <div class="form-group col-sm-8 col-md-6">
-          {{ filter.form.manager.label_tag }}
-          {% render_field filter.form.pay_terms class="form-control" %}
-        </div> 
-        <div class="form-group col-sm-8 col-md-6">
-          {{ filter.form.analyst.label_tag }}
-          {% render_field filter.form.jurisdiction class="form-control" %}
-        </div> 
-        <div class="form-group col-sm-8 col-md-6">
-          {{ filter.form.analyst.label_tag }}
-          {% render_field filter.form.ownership class="form-control" %}
-        </div> 
-        <div class="form-group col-sm-8 col-md-6">
-        <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
-        </button>
-        </div>
-        </div>
-      </div>
-
+      {{ filter.form.company.label_tag }}
+      {% render_field filter.form.company class="form-control" %}
     </div>
+
+    <div class="form-group col-md-6">
+      {{ filter.form.ownership.label_tag }}
+      {% render_field filter.form.ownership class="form-control" %}
+    </div>   
+    <div class="form-group col-12">
+      {{ filter.form.oarex_rating.label_tag }}
+      {% render_field filter.form.oarex_rating class="form-control col-md-12" %}
+    </div>
+    <div class="form-group col-12">
+      {{ filter.form.pay_terms.label_tag }}
+      {% render_field filter.form.pay_terms class="form-control" %}
+    </div> 
+    <div class="form-group col-sm-12 col-md-12">
+      {{ filter.form.jurisdiction.label_tag }}
+      <div class='row'>
+        {% for choice in filter.form.jurisdiction %}
+          <label class="checkbox-inline col-md-2">
+            {{ choice.tag }} {{ choice.choice_label }}
+          </label>
+        {% endfor %}
+     </div>
+    <div class="form-group col-sm-8 col-md-6">
+    <button type="submit" class="btn btn-primary">
+    <span class="glyphicon glyphicon-search"></span> Search
+    </button>
+    </div>
+    </div>
+  </div>
+
+</div>
 </form>
 {% if not filter.qs %}
 <h3>No results found</h3>
