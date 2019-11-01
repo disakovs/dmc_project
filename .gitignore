@@ -1,0 +1,9 @@
+.env*
+
+*.sw[p,o]
+
+db.sqlite*
+staticfiles/
+
+__pycache__/
+*.py[cod]
