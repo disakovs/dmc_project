@@ -14,6 +14,11 @@ class DataUploadView(LoginRequiredMixin, FormView):
     form_class = UploadDataForm
     template_name = 'agency/upload.html'           
 
+    def form_valid(self, form):
+        form.load_data()
+        return super().form_valid(form)
+
+    """
     def post(self, request, *args, **kwargs):
         form = self.get_form(self.form_class)
         csv_file = request.FILES['csv_file']
@@ -36,10 +41,8 @@ class DataUploadView(LoginRequiredMixin, FormView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-        
-            
+    """
     
     def get_success_url(self):
         messages.success(self.request, "File Upload Successfully!")
-        return reverse('oarex:filter')
-
+        return reverse('agency:filter')
