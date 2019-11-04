@@ -4,6 +4,7 @@ from .models import DebtorData
 from django import forms
 # Create your models here.
 def create_jurisdiction_choices():
+    return ()
     qs = DebtorData.objects.order_by().values('jurisdiction').distinct()
     print('qs:', qs)
     choices = []
