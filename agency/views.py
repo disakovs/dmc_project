@@ -12,7 +12,7 @@ class DataUploadView(LoginRequiredMixin, FormView):
     login_url = 'admin:login'
     
     form_class = UploadDataForm
-    template_name = 'oarex/upload.html'           
+    template_name = 'agency/upload.html'           
 
     def post(self, request, *args, **kwargs):
         form = self.get_form(self.form_class)
