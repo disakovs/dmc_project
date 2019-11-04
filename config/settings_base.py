@@ -25,7 +25,7 @@ SECRET_KEY = 'wuk#to!58b)4nuw0q&^5i8_j&cx81$p))84na9+qpii23!4775'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'oarex',
+    "agency",
     'django_filters',
     'widget_tweaks',
 ]
