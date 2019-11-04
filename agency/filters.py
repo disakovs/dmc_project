@@ -5,16 +5,8 @@ from django import forms
 
 
 def create_jurisdiction_choices():
-    return ()
-    qs = models.Agency.objects.order_by().values('jurisdiction').distinct()
-    print('qs:', qs)
-    choices = []
-    for object in qs:
-        choice_tuple = (object['jurisdiction'], object['jurisdiction'])
-        
-        choices.append(choice_tuple)
-
-    return choices 
+    qs = models.Agency.objects.values_list('jurisdiction', flat=True).order_by().distinct()
+    return ((jurisdiction, jurisdiction) for jurisdiction in qs)
 
     
 class DebtorDataFilter(django_filters.FilterSet):
@@ -23,14 +15,13 @@ class DebtorDataFilter(django_filters.FilterSet):
         ('Public', 'Public'),
         ('Private', 'Private'),
     )
-    JURISDICTION_CHOICES = create_jurisdiction_choices()
     
     ownership = django_filters.CharFilter(field_name='ownership', label='Ownership', widget=forms.Select(choices=OWNERSHIP_CHOICES))
     pay_terms = django_filters.RangeFilter(label='Pay Terms Range (min-max)')
-    jurisdiction = django_filters.MultipleChoiceFilter(field_name='jurisdiction', choices=JURISDICTION_CHOICES, widget=forms.CheckboxSelectMultiple)
+    jurisdiction = django_filters.MultipleChoiceFilter(field_name='jurisdiction', choices=create_jurisdiction_choices, widget=forms.CheckboxSelectMultiple)
     oarex_rating = django_filters.RangeFilter(label='Oarex rating range (min-max)')
-    company = django_filters.CharFilter(field_name='company', lookup_expr='icontains', label='Company Search')
+    name = django_filters.CharFilter(field_name='name', lookup_expr='icontains', label='Company Search')
     
     class Meta:
         model = models.Agency
-        fields = ['company', 'oarex_rating', 'pay_terms', 'jurisdiction', 'ownership']
+        fields = ['name', 'oarex_rating', 'pay_terms', 'jurisdiction', 'ownership']
