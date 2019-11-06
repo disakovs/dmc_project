@@ -2,13 +2,12 @@
 {% load widget_tweaks %}
 {% block page_content %}
 <form method='get'>
-{% csrf_token %}
 <div class="row">
     
     <div class="form-group col-md-6">
 
-      {{ filter.form.company.label_tag }}
-      {% render_field filter.form.company class="form-control" %}
+      {{ filter.form.name.label_tag }}
+      {% render_field filter.form.name class="form-control" %}
     </div>
 
     <div class="form-group col-md-6">
@@ -59,7 +58,7 @@
         <tbody>
             {% for debtor_data in filter.qs %}
             <tr>
-                <th scope='row'>{{debtor_data.company}}</th>
+                <th scope='row'>{{debtor_data.name}}</th>
                 <td>{{debtor_data.oarex_rating}}</td>
                 <td>{{debtor_data.pay_terms}}</td>
                 <td>{{debtor_data.jurisdiction}}</td>
