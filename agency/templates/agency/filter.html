@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block page_content %}
+<style>
+#id_oarex_rating_0,
+#id_oarex_rating_1,{
+display: inline-block !important;
+i:}
+
+</style>
+
 <form method='get'>
 <div class="row">
     
@@ -13,10 +21,12 @@
     <div class="form-group col-md-6">
       {{ filter.form.ownership.label_tag }}
       {% render_field filter.form.ownership class="form-control" %}
-    </div>   
+    </div>
+    <div class='row'>
     <div class="form-group col-12">
       {{ filter.form.oarex_rating.label_tag }}
-      {% render_field filter.form.oarex_rating class="form-control col-md-12" %}
+      {% render_field filter.form.oarex_rating class="form-control col-md-6" %}
+    </div>
     </div>
     <div class="form-group col-12">
       {{ filter.form.pay_terms.label_tag }}

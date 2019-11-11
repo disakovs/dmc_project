@@ -40,9 +40,6 @@ class Agency(models.Model):
             # Update all fields on the agency
             agency.update_from_dict(row)
 
-            # Save it
-            agency.save()
-
             # Add the name to a list of agency names
             agency_name_list.append(agency.name)
 
